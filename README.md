@@ -1,6 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/_2xjYeZK)
 
-## Якщо хочеш запустити цей проєкт:
+## Якщо маєш бажання запустити цей проєкт:
 1. На основі файлу .env-example створи файл .env
 2. В змінну REACT_APP_TOKEN встав токен ресурсу api.wisey.app в форматі "Bearer /token/"
 3. Команда npm run start
