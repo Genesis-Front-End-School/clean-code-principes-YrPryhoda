@@ -12,6 +12,8 @@ import {courseService} from '../service/course.service';
 import {useFetch} from '../hooks/useFetch';
 import {CoursePreview} from '../../types';
 
+const ITEMS_PER_PAGE = 10;
+
 export const CourseListPage = () => {
     const {loading, data, error} = useFetch<CoursePreview[]>(courseService.getCourses);
     const [searchParams] = useSearchParams();
@@ -20,7 +22,7 @@ export const CourseListPage = () => {
 
     useEffect(() => {
         if (data) {
-            const forPage = coursesPerPage(data, page, 10);
+            const forPage = coursesPerPage(data, page, ITEMS_PER_PAGE);
             setPageItems(forPage);
         }
     }, [page, data, searchParams]);

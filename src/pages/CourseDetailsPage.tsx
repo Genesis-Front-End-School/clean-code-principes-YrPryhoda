@@ -30,7 +30,11 @@ export const CourseDetailsPage = () => {
     const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
 
     const handlerChangeLesson = (id: string) => {
-        const lesson = data!.lessons.find(el => el.id === id);
+				if(!data || !data.length) {
+					return;
+				}
+			
+        const lesson = data.lessons.find(el => el.id === id);
         if (!lesson) {
             return;
         }
@@ -54,13 +58,20 @@ export const CourseDetailsPage = () => {
 
         if (currentLesson) {
             const currentVideoTime = Number(storageService.getItem(currentLesson.id));
-            ref && currentVideoTime && (ref.currentTime = currentVideoTime);
+						
+            if(ref && currentVideoTime) {
+							ref.currentTime = currentVideoTime;
+						}
         }
 
         return () => {
             const time = ref?.currentTime;
             if (time) {
-                storageService.setItem(currentLesson!.id, time.toString());
+							if(!currentLesson) {
+								return;
+							}
+
+              storageService.setItem(currentLesson.id, time.toString());
             }
         };
     }, [currentLesson]);
@@ -106,7 +117,7 @@ export const CourseDetailsPage = () => {
             <Grid item xs={12} md={4} lg={3} sx={{maxHeight: '820px', overflow: 'auto'}}>
                 <LessonsList
                     lessons={data.lessons}
-                    onClick={handlerChangeLesson}
+                    onLessonCardClick={handlerChangeLesson}
                 />
             </Grid>
         </Grid>
